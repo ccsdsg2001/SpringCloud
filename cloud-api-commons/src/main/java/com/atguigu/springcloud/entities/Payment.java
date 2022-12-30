@@ -7,8 +7,10 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 
 /**
- * @author cc
- * @date 2022年12月26日 15:57
+ * (Payment)实体类
+ *
+ * @author makejava
+ * @since 2020-03-06 14:22:26
  */
 @Data
 @AllArgsConstructor
