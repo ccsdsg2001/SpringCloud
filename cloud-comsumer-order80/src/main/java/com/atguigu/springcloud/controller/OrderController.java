@@ -35,13 +35,13 @@ public class OrderController {
         return restTemplate.getForObject(PAYENT_URL+"/payment/selectOne/"+id,CommonResult.class);
     }
 
-    @GetMapping("payment/lb")
+    @GetMapping("/consumer/payment/lb")
     public String getPaymentLB() {
         List<ServiceInstance> instances = discoveryClient.getInstances("CLOUD-PAYMENT-SERVICE");
         if (instances == null || instances.size() == 0) {
             return null;
         }
-        ServiceInstance serviceInstance = loadBalaner.instance(instances);
+        ServiceInstance serviceInstance = loadBalaner.instances(instances);
         URI uri = serviceInstance.getUri();
         System.out.println(uri+"/payment/lb");
         return restTemplate.getForObject(uri+"/payment/lb",String.class);

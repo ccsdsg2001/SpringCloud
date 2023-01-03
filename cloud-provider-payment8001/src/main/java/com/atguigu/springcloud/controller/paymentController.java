@@ -38,7 +38,7 @@ public class PaymentController {
      * @param id 主键
      * @return 单条数据
      */
-    @GetMapping("get/{id}")
+    @GetMapping("/get/{id}")
     public CommonResult<Payment> selectOne(@PathVariable("id") Long id) {
         Payment payment = this.paymentService.queryById(id);
 
@@ -67,7 +67,7 @@ public class PaymentController {
         return this.discoveryClient;
     }
 
-    @GetMapping("lb")
+    @GetMapping("/payment/lb")
     public String getPaymentLB() {
         return serverPort;
     }
