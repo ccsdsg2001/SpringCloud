@@ -53,6 +53,8 @@ public class PaymentController {
         return new CommonResult(200,"insert success" ,insert);
     }
 
+
+
     @GetMapping("discovery")
     public Object discovery() {
         List<String> services = discoveryClient.getServices();
