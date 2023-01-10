@@ -1,4 +1,4 @@
-package com.atguigu.springcloud.alibaba.controller;
+package com.atguigu.springcloud.controller;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
@@ -12,12 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
 
 @RestController
 public class CircleBreakerController {
 
-    @Value("${server.port}")
+    @Value("${server.post}")
     private String serverPost;
 
     public static final String SERVICE_URL="http://nacos-payment-provider";
@@ -30,7 +29,7 @@ public class CircleBreakerController {
 //    @SentinelResource(value = "fallback",fallback = "handlerFallback")  //fallback只负责业务异常
 //    @SentinelResource(value = "fallback",blockHandler = "blockHandler") //blockHandler只负责sentine控制台配置违规
 //    @SentinelResource(value = "fallback",fallback = "handlerFallback",blockHandler = "blockHandler") //handlerFallback和blockHandler都配置
-    @SentinelResource(value = "fallback",fallback = "handlerFallback" ,blockHandler = "blockHandler", exceptionsToIgnore = IllegalAccessException.class) //exceptionsToIgnore配置
+    @SentinelResource(value = "fallback",fallback = "handlerFallback",blockHandler = "blockHandler", exceptionsToIgnore = IllegalAccessException.class) //exceptionsToIgnore配置
     public CommonResult<Payment> fallback(@PathVariable("id") Long id) {
         CommonResult<Payment> result = restTemplate.getForObject(SERVICE_URL+"/paymentSQL/"+id,CommonResult.class,id);
         if (id==4) {
